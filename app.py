@@ -8,12 +8,15 @@ from PIL import Image
 import io
 import cv2
 import tempfile
+import toml
 
 # 환경 변수 로드 및 OpenAI API 키 설정
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 if openai_api_key is None:
-    openai_api_key = 'your-openai-api-key'
+    # 환경 변수가 없으면 TOML 파일에서 불러오기
+    config = st.secrets["openai_api_key"]
+    openai_api_key = config["openai"]["api_key"]
 openai.api_key = openai_api_key
 
 def resize_image(image, max_size=20):
