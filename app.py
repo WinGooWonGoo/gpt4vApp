@@ -15,8 +15,7 @@ load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 if openai_api_key is None:
     # 환경 변수가 없으면 TOML 파일에서 불러오기
-    config = st.secrets["openai_api_key"]
-    openai_api_key = config["openai"]["api_key"]
+    openai_api_key = st.secrets["openai"]["api_key"]
 openai.api_key = openai_api_key
 
 def resize_image(image, max_size=20):
